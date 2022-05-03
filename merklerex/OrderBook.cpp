@@ -6,7 +6,7 @@
 //
 
 #include "OrderBook.hpp"
-#include "CSVReader.hpp"
+#include <map>
 
 /** construct, reading a csv data file */
 OrderBook::OrderBook(std::string filename) {
@@ -15,6 +15,18 @@ OrderBook::OrderBook(std::string filename) {
 /** return vector of all know products in the dataset*/
 std::vector<std::string> OrderBook::getKnownProducts() {
     std::vector<std::string> products;
+    std::map<std::string,bool> prodMap;
+    
+    for (const OrderBookEntry& e : orders)
+    {
+        prodMap[e.product] = true;
+    }
+    
+    for (const auto& e : prodMap)
+    {
+        products.push_back(e.first);
+    }
+    
     return products;
 }
 /** return vector of Orders according to the sent filters*/
