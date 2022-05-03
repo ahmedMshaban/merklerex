@@ -48,23 +48,27 @@ void MerkelMain::printHelp() {
 }
 
 void MerkelMain::printMarketStats() {
-    for (std::string const& p : orderBook.getKnownProducts()) {
+    std::string currentTime = "2020/03/17 17:01:24.884492";
+    for (const std::string& p : orderBook.getKnownProducts())
+    {
         std::cout << "Product: " << p << std::endl;
+        std::vector<OrderBookEntry> entries = orderBook.getOrders(OrderBookType::ask, p, currentTime);
+        std::cout << "Asks seen: " << entries.size() << std::endl;
     }
-
-//    std::cout << "OrderBook contains " << orders.size() << " entries" << std::endl;
-//    unsigned int bids = 0;
-//    unsigned int asks = 0;
-//
-//    for(OrderBookEntry& e : orders) {
-//        if(e.orderType == OrderBookType::ask) {
-//            asks++;
-//        } else if(e.orderType == OrderBookType::bid) {
-//            bids++;
-//        }
-//    }
-//
-//    std::cout << "Orderbook asks: " << asks << " bids: " << bids << std::endl;
+    
+    //    std::cout << "OrderBook contains " << orders.size() << " entries" << std::endl;
+    //    unsigned int bids = 0;
+    //    unsigned int asks = 0;
+    //
+    //    for(OrderBookEntry& e : orders) {
+    //        if(e.orderType == OrderBookType::ask) {
+    //            asks++;
+    //        } else if(e.orderType == OrderBookType::bid) {
+    //            bids++;
+    //        }
+    //    }
+    //
+    //    std::cout << "Orderbook asks: " << asks << " bids: " << bids << std::endl;
 }
 
 void MerkelMain::enterAsk() {
