@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include "OrderBookEntry.hpp"
+#include "OrderBook.hpp"
 
 class MerkelMain {
 public:
@@ -19,7 +20,6 @@ public:
     /** Call this to start the sim*/
     void init();
 private:
-    void loadOrderBook();
     void printMenu();
     int getUserOption();
     void printHelp();
@@ -29,7 +29,8 @@ private:
     void printWallet();
     void gotoNextTimeframe();
     void processUserOption(int userOption);
-    std::vector<OrderBookEntry> orders;
+    
+    OrderBook orderBook{"20200317.csv"};
 };
 
 #endif /* MerkelMain_hpp */
