@@ -31,6 +31,7 @@ private:
     void processUserOption(int userOption);
     
     OrderBook orderBook{"20200317.csv"};
+    std::string currentTime;
 };
 
 #endif /* MerkelMain_hpp */
