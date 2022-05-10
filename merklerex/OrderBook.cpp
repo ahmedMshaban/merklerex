@@ -7,6 +7,7 @@
 
 #include "OrderBook.hpp"
 #include <map>
+#include <algorithm>
 
 /** construct, reading a csv data file */
 OrderBook::OrderBook(std::string filename) {
@@ -85,3 +86,8 @@ std::string OrderBook::getNextTime(const std::string& timestamp) {
     return next_timestamp;
 }
 
+void OrderBook::insertOrder(OrderBookEntry& order)
+{
+    orders.push_back(order);
+    std::sort(orders.begin(), orders.end(), OrderBookEntry::compareByTimestamp);
+}

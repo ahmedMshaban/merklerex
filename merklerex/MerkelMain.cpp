@@ -36,11 +36,17 @@ void MerkelMain::printMenu() {
 }
 
 int MerkelMain::getUserOption() {
-    int userOption;
+    int userOption = 0;
+    std::string line;
     std::cout << "Type in 1-6" << std::endl;
-    std::cin >> userOption;
+    std::getline(std::cin, line);
+    try {
+        userOption = std::stoi(line);
+    } catch(const std::exception& e)
+    {
+        
+    }
     std::cout << "You chose: " << userOption << std::endl;
-    
     return userOption;
 }
 
@@ -60,11 +66,49 @@ void MerkelMain::printMarketStats() {
 }
 
 void MerkelMain::enterAsk() {
-    std::cout << "Make an offer - enter the amount. " << std::endl;
+    std::cout << "Make an ask - enter the amount: product,price, amount, eg ETH/BTC,200,0.5" << std::endl;
+    std::string input;
+    std::getline(std::cin, input);
+    
+    std::vector<std::string> tokens = CSVReader::tokenise(input, ',');
+    if(tokens.size() != 3) {
+        std::cout << "MerkelMain::enterAsk Bad input! " << input << std::endl;
+    } else {
+        try {
+            OrderBookEntry obe = CSVReader::stringsToOBE(tokens[1],
+                                                         tokens[2],
+                                                         currentTime,
+                                                         tokens[0],
+                                                         OrderBookType::ask
+                                                         );
+            orderBook.insertOrder(obe);
+        } catch (const std::exception& e) {
+            std::cout << "MerkelMain::enterAsk Bad input! " << std::endl;
+        }
+    }
 }
 
 void MerkelMain::enterBid() {
-    std::cout << "Make a bid - enter the amount. " << std::endl;
+    std::cout << "Make an bid - enter the amount: product,price, amount, eg ETH/BTC,200,0.5" << std::endl;
+    std::string input;
+    std::getline(std::cin, input);
+    
+    std::vector<std::string> tokens = CSVReader::tokenise(input, ',');
+    if(tokens.size() != 3) {
+        std::cout << "MerkelMain::enterBid Bad input! " << input << std::endl;
+    } else {
+        try {
+            OrderBookEntry obe = CSVReader::stringsToOBE(tokens[1],
+                                                         tokens[2],
+                                                         currentTime,
+                                                         tokens[0],
+                                                         OrderBookType::bid
+                                                         );
+            orderBook.insertOrder(obe);
+        } catch (const std::exception& e) {
+            std::cout << "MerkelMain::enterBid Bad input! " << std::endl;
+        }
+    }
 }
 
 void MerkelMain::printWallet() {

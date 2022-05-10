@@ -33,6 +33,8 @@ public:
      * sent time in the orderbook
      */
     std::string getNextTime(const std::string& timestamp);
+    void insertOrder(OrderBookEntry& order);
+    
 private:
     std::vector<OrderBookEntry> orders;
 };
