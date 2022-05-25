@@ -12,8 +12,7 @@
 #include "OrderBookEntry.hpp"
 #include "CSVReader.hpp"
 
-class OrderBook
-{
+class OrderBook {
 public:
     /** construct, reading a csv data file */
     OrderBook(std::string filename);
