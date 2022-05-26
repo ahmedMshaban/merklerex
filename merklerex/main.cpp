@@ -11,9 +11,13 @@
 #include "OrderBookEntry.hpp"
 #include "MerkelMain.hpp"
 #include "CSVReader.hpp"
+#include "Wallet.hpp"
 
 int main(int argc, const char * argv[]) {
-    MerkelMain app{};
-    app.init();
+//    MerkelMain app{};
+//    app.init();
+    Wallet wallet;
+    wallet.insertCurrency("BTC", 1.5);
+    std::cout << "Wallet should contain 1.5 BTC now" << std::endl;
     return 0;
 }
